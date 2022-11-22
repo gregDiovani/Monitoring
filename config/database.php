@@ -3,7 +3,6 @@
 function getDatabaseConfig(): array
 {
 
-
     return [
         "database" => [
             "test" => [

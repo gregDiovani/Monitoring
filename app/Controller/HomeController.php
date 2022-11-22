@@ -10,8 +10,7 @@ class HomeController
     function index(): void
     {
         $model = [
-            "title" => "Gregorio Belajar MVC",
-            "content" => "Selamat datang di webiste MVC gregorio"
+            "title" => "Smart Prepaid Dashboard"
         ];
 
         View::render('Home/index', $model);
