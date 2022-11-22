@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Gregorio\\Config\\DatabaseTest::testGetConnection":4,"Gregorio\\Config\\DatabaseTest::testGetConnectionSingleton":4},"times":{"Gregorio\\Config\\DatabaseTest::testGetConnection":0.274,"Gregorio\\Config\\DatabaseTest::testGetConnectionSingleton":0.046}}
