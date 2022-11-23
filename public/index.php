@@ -8,7 +8,7 @@ use Gregorio\Controller\HomeController;
 
 
 Router::add('GET', '/', HomeController::class, 'index');
-Router::add('GET', '/transaksi', HomeController::class, 'hello');
+Router::add('GET', '/history', HomeController::class, 'hello');
 
 
 Router::run();

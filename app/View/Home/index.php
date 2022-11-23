@@ -108,7 +108,7 @@
                                 <div class="stats-data">
                                     <div class="stats-number">
 
-
+                                    <?= $model['data']['pendapatan'] ?>
                                     </div>
                                     <div class="stats-change">
 
@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="stats-data">
                                     <div class="stats-number">
-
+                                        <?= $model['data']['jumlahPengsian'] ?>
 
                                     </div>
                                     <div class="stats-change">
@@ -149,7 +149,7 @@
                                 <div class="stats-data">
                                     <div class="stats-number">
 
-
+                                        <?= $model['data']['jumlahkamar'] ?>
                                     </div>
                                 </div>
                             </div>
@@ -180,7 +180,7 @@
                                 <canvas id="spurChartjsBar"></canvas>
                                 <script>
 
-                                    const xValues1 = [2,3,4,5];
+                                    const xValues1 = [<?php foreach ($model['data']['chart'] as $row) { echo '"' . $row["date_format(tgl, '%M')"] . '",';} ?> ];
 
                                     var ctx = document.getElementById("spurChartjsBar").getContext('2d');
                                     var myChart = new Chart(ctx, {
@@ -190,18 +190,10 @@
                                             datasets: [
                                                 {
                                                     label: 'K1',
-                                                    data: [2,3,4,5],
+                                                    data: [<?php foreach ($model['data']['chart'] as $row) { echo '"' . $row["totalPakai"] . '",'; } ?>],
                                                     backgroundColor: window.chartColors.primary,
                                                     borderColor: 'transparent'
-                                                },
-                                                {
-                                                    label: "K2",
-                                                    backgroundColor: "rgba(182,127,0,1)",
-                                                    borderColor: "rgba(117,61,41,1)",
-                                                    borderWidth: 1,
-                                                    data: [2,3,4,5],
-                                                    stack: "s1"
-                                                },
+                                                }
 
                                             ]
                                         },
@@ -233,7 +225,19 @@
                             <div class="card-body ">
                                 <div class="notifications">
 
+                                    <?php
+                                    foreach ($model['data']['notifikasi'] as $row) {
+                                        echo '<a href="#!" class="notification">
+                                              <div class="notification-icon">
+                                              <i class="fas fa-inbox"></i>';
+                                        echo '</div><div class="notification-text">Rp' .$row["amount_rp"]. '';
+                                        echo '</div>';
+                                        echo '<span class="notification-time">' . $row["time"] . '</span>';
+                                        echo '</a>';
 
+                                    }
+
+                                    ?>
 
                                 </div>
                             </div>
