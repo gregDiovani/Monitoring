@@ -52,6 +52,15 @@ class Service
         return $datas;
     }
 
+    public static function show_dataChartTransaksi():array
+    {
+        $sql = "select sum(amount_rp) as totalRp,time from t_bayar group by date_format(time, '%M') DESC ";
+        $datas= Repository::fetchAll($sql);
+
+        return $datas;
+    }
+
+
 
     public static function show_notifikasi():array
     {
@@ -60,7 +69,18 @@ class Service
         return $datas;
     }
 
+    public static function show_transaksi():array
 
-
+    {
+        $sql = "SELECT * FROM t_bayar";
+        $datas= Repository::fetchAll($sql);
+        return $datas;
+    }
 
 }
+
+
+
+
+
+

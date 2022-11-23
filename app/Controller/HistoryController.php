@@ -3,6 +3,7 @@
 namespace Gregorio\Controller;
 
 use Gregorio\App\View;
+use Gregorio\Service\Service;
 
 class HistoryController
 {
@@ -10,7 +11,11 @@ class HistoryController
     {
 
         $model = [
-            "title" => "Smart Prepaid Dashboard"
+            "title" => "Smart Prepaid Dashboard",
+            "data" => [
+                "data-transaksi" => Service::show_transaksi(),
+                "chart" => Service::show_dataChartTransaksi()
+                ]
             ];
 
         View::render('Home/history', $model);
