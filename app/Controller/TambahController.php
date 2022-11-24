@@ -9,6 +9,8 @@ use Gregorio\Model\Pulsa;
 use Gregorio\Repository\Repository;
 use Gregorio\Service\Service;
 
+session_start();
+
 class TambahController
 {
 
@@ -41,6 +43,7 @@ class TambahController
     public function tambahPulsa()
 
     {
+
     $requestpulsa = new Pulsa();
     $requestpulsa->id_kamar = $_POST['id'];
     $requestpulsa->pulsa = $_POST['pulsa'];
@@ -48,14 +51,18 @@ class TambahController
 
         try {
             $this->service->tambah_pulsa($requestpulsa);
-            View::redirect('/tambah',[
-                "pesan" =>" Penambahan data Berhasil"
-            ]);
+
+            $_SESSION['success'] = "Penambahan Data Berhasil";
+            View::redirect('/tambah');
         }catch (ValidateExecption $exception){
-            View::render('Home/tambah',[
-                'title' => 'Tambah Pulsa',
-                'error' => $exception->getMessage()
+            View::render('Home/tambah', [
+                "title" => "Tambah PulsaRequest",
+                "data" => [
+                    "transaksi" => Service::show_Distinct(),
+                    "error" => $exception->getMessage()
+                ]
             ]);
+
 
         }
 

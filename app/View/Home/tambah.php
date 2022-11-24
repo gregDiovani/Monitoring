@@ -2,6 +2,7 @@
 <?php
 
 
+
 ?>
 
 <!doctype html>
@@ -15,13 +16,34 @@
 
         <?php require __DIR__ . '/../Partial/rightsidebar.php' ?>
 
-            <?php if(isset($message['pesan'])){
 
-               echo '<div class="alert alert-success" role="alert">
-                      <h4 class="alert-heading">Penambahan pulsa Berhasil</h4>
-                    </div>';
-            } ?>
+
+
+
+
+
             <main class="dash-content">
+                <?php if(isset($_SESSION["success"])){
+
+                    echo <<< 'Success'
+                    <div class="alert alert-success" role="alert">
+                      <h4 class="alert-heading">Penambahan pulsa perhasil</h4>
+                    </div>  
+                Success;
+                    unset($_SESSION["success"]);
+
+
+                }
+
+
+
+                ?>
+
+                <?php if(isset($model['data']['error'])) { ?>
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading"><?= $model['data']['error'] ?></h4>
+                    </div>
+                <?php } ?>
                 <div class="container-fluid">
 
                     <h1 class="dash-title">Tambah Pulsa</h1>
@@ -168,13 +190,13 @@
                                         <div class="form-row">
                                             <div class="form-group col-md-6">
                                                 <label for="inputState">Kamar</label>
-                                                <select  name="id" id="inputState" class="form-control">
-                                                    <?php foreach ($model['data']['transaksi'] as $data) {
+                                                <select  name="id" id="inputState"  class="form-control">
 
-                                                        echo '<option selected >'. $data['id_kamar']. '</option >';
+                                                    <?php foreach($model['data']['transaksi'] as  $value) { ?>
 
-                                                    }
-                                                    ?>
+                                                        <option value="<?php echo $value['id_kamar'];?>"><?php echo $value['id_kamar'];?></option>
+
+                                                    <?php } ?>
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
@@ -227,5 +249,6 @@
 
 
 </body>
+
 
 </html>

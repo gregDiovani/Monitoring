@@ -129,7 +129,7 @@ class Service
 
     private function validateInsertPulsa(Pulsa $pulsarequest)
     {
-        if($pulsarequest->id_kamar == null || $pulsarequest->pulsa == null || $pulsarequest->receiptID == null ||  trim($pulsarequest->id_kamar ) == ""  || trim($pulsarequest->pulsa ) == "" || trim($pulsarequest->receiptID ) == "" )
+        if($pulsarequest->id_kamar == null || $pulsarequest->pulsa == null || $pulsarequest->receiptID == null ||  trim($pulsarequest->id_kamar ) == ""  || trim($pulsarequest->pulsa ) == "" || trim ($pulsarequest->receiptID ) == "" )
         {
             throw new ValidateExecption("id_kamar, pulsa, receipt_Id tidak boleh kosong");
         }
