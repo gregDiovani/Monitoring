@@ -2,11 +2,27 @@
 
 namespace Gregorio\Service;
 
+use Gregorio\Config\Database;
+use Gregorio\Exception\ValidateExecption;
+use Gregorio\Model\Pulsa;
+use Gregorio\Model\PulsaResponse;
 use Gregorio\Model\Transaksi;
 use Gregorio\Repository\Repository;
 
+
 class Service
 {
+
+    private Repository $repository;
+
+    /**
+     * @param Repository $repository
+     */
+    public function __construct(Repository $repository)
+    {
+        $this->repository = $repository;
+    }
+
 
     public static function show_pendapatan():array
 
@@ -60,8 +76,6 @@ class Service
         return $datas;
     }
 
-
-
     public static function show_notifikasi():array
     {
         $sql = "select amount_rp,date_format(time, '%a %b %e %Y %T') AS time from t_bayar ORDER BY kd DESC limit 2";
@@ -76,6 +90,55 @@ class Service
         $datas= Repository::fetchAll($sql);
         return $datas;
     }
+
+    public static function show_Distinct():array
+
+    {
+        $sql = "SELECT DISTINCT id_kamar FROM t_bayar;";
+        $datas= Repository::fetchAll($sql);
+        return $datas;
+    }
+
+
+
+    public function tambah_pulsa(Pulsa $pulsarequest): PulsaResponse
+    {
+        $this->validateInsertPulsa($pulsarequest);
+
+        try{
+            Database::beginTransaction();
+            $pulsa = new Pulsa();
+            $pulsa->id_kamar = $pulsarequest->id_kamar;
+            $pulsa->pulsa = $pulsarequest->pulsa;
+            $pulsa->receiptID = $pulsarequest->receiptID;
+            $this->repository->save($pulsa);
+
+            $response = new PulsaResponse();
+            $response->pulsa = $pulsa;
+            Database::commitTransaction();
+
+        return $response;
+        }catch (\Exception $exception){
+            Database::rollbackTransaction();
+            throw $exception;
+
+        }
+
+
+    }
+
+    private function validateInsertPulsa(Pulsa $pulsarequest)
+    {
+        if($pulsarequest->id_kamar == null || $pulsarequest->pulsa == null || $pulsarequest->receiptID == null ||  trim($pulsarequest->id_kamar ) == ""  || trim($pulsarequest->pulsa ) == "" || trim($pulsarequest->receiptID ) == "" )
+        {
+            throw new ValidateExecption("id_kamar, pulsa, receipt_Id tidak boleh kosong");
+        }
+
+
+
+    }
+
+
 
 }
 

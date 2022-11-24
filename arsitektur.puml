@@ -1,0 +1,30 @@
+@startuml
+
+actor "user" as user
+
+node "QRIS Dashboard"{
+    node "Model" as model
+     node "Service" as Service
+    node "Controller" as Controller
+     node "Repository" as Repository
+    node "view" as view
+
+
+}
+
+database "MYSQL" as mysql
+
+user --> "Controller" :1
+"Controller"-->model :2
+"Controller"-->Service :3
+"Service"-->"Repository" :4
+"Repository"-->mysql :5
+"Controller"-->view :6
+"Controller"-->user :7
+
+
+
+
+
+
+@enduml
