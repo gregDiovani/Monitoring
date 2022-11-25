@@ -3,26 +3,27 @@
 namespace Gregorio\Service;
 
 use Gregorio\Config\Database;
-use Gregorio\Model\Pulsa;
-use Gregorio\Repository\Repository;
+use Gregorio\Entity\Pulsa;
+use Gregorio\Model\PulsaRequest;
+use Gregorio\Repository\RepositoryTransaksi;
 use PHPUnit\Framework\TestCase;
 
 class TambahPulsaTest extends TestCase
 
 {
 
-    private Service $userService;
+    private ServiceMysql $userService;
 
     public function setUp(): void
     {
         $koneksi = Database::getConnection();
-        $Repository = new Repository($koneksi);
-        $this->userService = new Service($Repository);
+        $Repository = new RepositoryTransaksi($koneksi);
+        $this->userService = new ServiceMysql($Repository);
     }
 
     public function testRegisterSuccess()
     {
-        $request = new Pulsa();
+        $request = new PulsaRequest();
         $request->pulsa = 90000;
         $request->id_kamar= "K01";
         $request->receiptID= "131011717053";

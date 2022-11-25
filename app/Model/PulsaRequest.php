@@ -2,7 +2,7 @@
 
 namespace Gregorio\Model;
 
-class Pulsa
+class PulsaRequest
 {
   public ?int $pulsa = null;
   public ?string $id_kamar = null;

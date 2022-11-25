@@ -3,7 +3,7 @@
 namespace Gregorio\Controller;
 
 use Gregorio\App\View;
-use Gregorio\Service\Service;
+use Gregorio\Service\ServiceMysql;
 
 class HistoryController
 {
@@ -13,8 +13,8 @@ class HistoryController
         $model = [
             "title" => "Smart Prepaid Dashboard",
             "data" => [
-                "data-transaksi" => Service::show_transaksi(),
-                "chart" => Service::show_dataChartTransaksi()
+                "data-transaksi" => ServiceMysql::show_transaksi(),
+                "chart" => ServiceMysql::show_dataChartTransaksi()
                 ]
             ];
 

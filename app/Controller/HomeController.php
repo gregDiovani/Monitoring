@@ -3,7 +3,7 @@
 namespace Gregorio\Controller;
 
 use Gregorio\App\View;
-use Gregorio\Service\Service;
+use Gregorio\Service\ServiceMysql;
 
 class HomeController
 {
@@ -15,11 +15,11 @@ class HomeController
         $model = [
             "title" => "Smart Prepaid Dashboard",
             "data" => [
-                "pendapatan" => Service::show_pendapatan()[0],
-                "jumlahPengsian" => Service::show_pendapatan()[1],
-                "jumlahkamar" => Service::show_jumlahKamar(),
-                "chart" => Service::show_dataChart('K01'),
-                "notifikasi"=> Service::show_notifikasi()
+                "pendapatan" => ServiceMysql::show_pendapatan()[0],
+                "jumlahPengsian" => ServiceMysql::show_pendapatan()[1],
+                "jumlahkamar" => ServiceMysql::show_jumlahKamar(),
+                "chart" => ServiceMysql::show_dataChart('K01'),
+                "notifikasi"=> ServiceMysql::show_notifikasi()
 
             ]
         ];

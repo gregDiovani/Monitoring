@@ -3,9 +3,10 @@
 namespace Gregorio\Repository;
 
 use Gregorio\Config\Database;
-use Gregorio\Model\Pulsa;
+use Gregorio\Entity\Pulsa;
+use Gregorio\Model\PulsaRequest;
 
-class Repository
+class RepositoryTransaksi
 {
 
     private \PDO $koneksi;
@@ -29,6 +30,7 @@ class Repository
         return $pulsa;
 
     }
+
 
     public static function fetchAll(string $sql):array
     {
