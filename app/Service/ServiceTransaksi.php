@@ -8,18 +8,16 @@ use Gregorio\Exception\ValidateExecption;
 use Gregorio\Model\PulsaRequest;
 use Gregorio\Model\PulsaResponse;
 use Gregorio\Model\Transaksi;
-use Gregorio\Repository\RepositoryTransaksi;
+use Gregorio\Repository\TransaksiRepository;
 
 
-class ServiceMysql
+class ServiceTransaksi
 {
 
-    private RepositoryTransaksi $repository;
+    private TransaksiRepository $repository;
 
-    /**
-     * @param RepositoryTransaksi $repository
-     */
-    public function __construct(RepositoryTransaksi $repository)
+
+    public function __construct(TransaksiRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -29,7 +27,7 @@ class ServiceMysql
 
     {
        $sql = "SELECT * FROM t_bayar";
-       $datas= RepositoryTransaksi::fetchAll($sql);
+       $datas= TransaksiRepository::fetchAll($sql);
 
         $sum = 0;
 
@@ -50,7 +48,7 @@ class ServiceMysql
 
     {
         $sql = "SELECT COUNT(DISTINCT id_kamar) as totalAktif FROM t_pakai";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $datas= TransaksiRepository::fetchAll($sql);
 
         foreach( $datas as  $data) {
             $data = intval($data['totalAktif']);
@@ -64,7 +62,7 @@ class ServiceMysql
     public static function show_dataChart(string $id_kamar):array
     {
         $sql = "select id_kamar, date_format(tgl, '%M'),TRUNCATE(sum(amount_rp)/1500,2 ) AS totalPakai from t_pakai where id_kamar='$id_kamar' group by date_format(tgl, '%M') DESC";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $datas= TransaksiRepository::fetchAll($sql);
 
         return $datas;
     }
@@ -72,15 +70,15 @@ class ServiceMysql
     public static function show_dataChartTransaksi():array
     {
         $sql = "select sum(amount_rp) as totalRp,time from t_bayar group by date_format(time, '%M') DESC ";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $datas= TransaksiRepository::fetchAll($sql);
 
         return $datas;
     }
 
     public static function show_notifikasi():array
     {
-        $sql = "select amount_rp,date_format(time, '%a %b %e %Y %T') AS time from t_bayar ORDER BY kd DESC limit 2";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $sql = "select amount_rp,date_format(time, '%a %b %e %Y %T') AS time from t_bayar ORDER BY kd DESC limit 4";
+        $datas= TransaksiRepository::fetchAll($sql);
         return $datas;
     }
 
@@ -88,7 +86,7 @@ class ServiceMysql
 
     {
         $sql = "SELECT * FROM t_bayar";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $datas= TransaksiRepository::fetchAll($sql);
         return $datas;
     }
 
@@ -96,7 +94,7 @@ class ServiceMysql
 
     {
         $sql = "SELECT DISTINCT id_kamar FROM t_bayar;";
-        $datas= RepositoryTransaksi::fetchAll($sql);
+        $datas= TransaksiRepository::fetchAll($sql);
         return $datas;
     }
 

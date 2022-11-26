@@ -6,7 +6,7 @@ use Gregorio\Config\Database;
 use Gregorio\Entity\Pulsa;
 use Gregorio\Model\PulsaRequest;
 
-class RepositoryTransaksi
+class TransaksiRepository
 {
 
     private \PDO $koneksi;

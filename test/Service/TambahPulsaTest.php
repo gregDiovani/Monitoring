@@ -5,20 +5,20 @@ namespace Gregorio\Service;
 use Gregorio\Config\Database;
 use Gregorio\Entity\Pulsa;
 use Gregorio\Model\PulsaRequest;
-use Gregorio\Repository\RepositoryTransaksi;
+use Gregorio\Repository\TransaksiRepository;
 use PHPUnit\Framework\TestCase;
 
 class TambahPulsaTest extends TestCase
 
 {
 
-    private ServiceMysql $userService;
+    private ServiceTransaksi $userService;
 
     public function setUp(): void
     {
         $koneksi = Database::getConnection();
-        $Repository = new RepositoryTransaksi($koneksi);
-        $this->userService = new ServiceMysql($Repository);
+        $Repository = new TransaksiRepository($koneksi);
+        $this->userService = new ServiceTransaksi($Repository);
     }
 
     public function testRegisterSuccess()

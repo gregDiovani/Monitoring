@@ -3,35 +3,68 @@
 namespace Gregorio\Controller;
 
 use Gregorio\App\View;
-use Gregorio\Service\ServiceMysql;
+use Gregorio\Config\Database;
+use Gregorio\Repository\SessionRepository;
+use Gregorio\Repository\UserRepository;
+use Gregorio\Service\ServiceTransaksi;
+use Gregorio\Service\SessionService;
 
 class HomeController
 {
 
+    private SessionService $sessionService;
+
+    public function __construct()
+    {
+        $connection = Database::getConnection();
+        $sessionRepository = new SessionRepository($connection);
+        $userRepository = new UserRepository($connection);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
+    }
+
+
     function index(): void
 
     {
+        $user = $this->sessionService->current();
 
-        $model = [
-            "title" => "Smart Prepaid Dashboard",
-            "data" => [
-                "pendapatan" => ServiceMysql::show_pendapatan()[0],
-                "jumlahPengsian" => ServiceMysql::show_pendapatan()[1],
-                "jumlahkamar" => ServiceMysql::show_jumlahKamar(),
-                "chart" => ServiceMysql::show_dataChart('K01'),
-                "notifikasi"=> ServiceMysql::show_notifikasi()
+
+
+
+        if ($user == null) {
+            View::render('Home/index', [
+                "title" => "PHP Login Management",
+                "data" => [
+                    "pendapatan" => ServiceTransaksi::show_pendapatan()[0],
+                    "jumlahPengsian" => ServiceTransaksi::show_pendapatan()[1],
+                    "jumlahkamar" => ServiceTransaksi::show_jumlahKamar(),
+                    "chart" => ServiceTransaksi::show_dataChart('K01'),
+                    "notifikasi"=> ServiceTransaksi::show_notifikasi()
+
+                ]
+
+            ]);
+
+    }
+        else {
+
+            View::render('Home/index', [
+                "title" => "Dashboard",
+                "user" => [
+                    "name" => $user->username
+                ],
+                 "data" => [
+                "pendapatan" => ServiceTransaksi::show_pendapatan()[0],
+                "jumlahPengsian" => ServiceTransaksi::show_pendapatan()[1],
+                "jumlahkamar" => ServiceTransaksi::show_jumlahKamar(),
+                "chart" => ServiceTransaksi::show_dataChart('K01'),
+                "notifikasi"=> ServiceTransaksi::show_notifikasi()
 
             ]
-        ];
-
-
-        View::render('Home/index', $model);
+            ]);
+        }
     }
 
-    function hello(): void
-    {
-
-    }
 
 
 }

@@ -8,8 +8,8 @@ use Gregorio\Exception\ValidateExecption;
 use Gregorio\Model\LoginRequest;
 use Gregorio\Model\RegisterRequest;
 use Gregorio\Model\RegisterResponse;
-use Gregorio\Repository\RepositoryLogin;
-use Gregorio\Repository\RepositoryTransaksi;
+use Gregorio\Repository\UserRepository;
+use Gregorio\Repository\TransaksiRepository;
 use PHPUnit\Framework\TestCase;
 
 class UserSeviceTest extends TestCase
@@ -17,12 +17,12 @@ class UserSeviceTest extends TestCase
 {
     private ServiceLogin $userService;
 
-    private RepositoryLogin $repositoryLogin;
+    private UserRepository $repositoryLogin;
 
     public function setUp(): void
     {
         $koneksi = Database::getConnection();
-        $this->repositoryLogin = new RepositoryLogin($koneksi);
+        $this->repositoryLogin = new UserRepository($koneksi);
         $this->userService = new ServiceLogin($this->repositoryLogin);
 
     }
@@ -86,9 +86,7 @@ class UserSeviceTest extends TestCase
 
     public function testLoginWrongPassword()
     {
-        $user = new User();
-        $user->username= "Spower";
-        $user->password = password_hash("|axelNuva07|", PASSWORD_BCRYPT);
+
 
         $this->expectException(ValidateExecption::class);
 
@@ -102,19 +100,19 @@ class UserSeviceTest extends TestCase
     public function testLoginSuccess()
     {
         $user = new User();
-        $user->id = "eko";
-        $user->name = "Eko";
+        $user->id = "Spower";
+        $user->name = "|axelNuva07|a";
         $user->password = password_hash("eko", PASSWORD_BCRYPT);
 
         $this->expectException(ValidationException::class);
 
-        $request = new UserLoginRequest();
-        $request->id = "eko";
-        $request->password = "eko";
+        $request = new LoginRequest();
+        $request->username = "Spower";
+        $request->password = "|axelNuva07|";
 
         $response = $this->userService->login($request);
 
-        self::assertEquals($request->id, $response->user->id);
+        self::assertEquals($request->username, $response->user->username);
         self::assertTrue(password_verify($request->password, $response->user->password));
     }
 

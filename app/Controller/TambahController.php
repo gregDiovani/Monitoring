@@ -6,22 +6,22 @@ use Gregorio\App\View;
 use Gregorio\Config\Database;
 use Gregorio\Exception\ValidateExecption;
 use Gregorio\Model\PulsaRequest;
-use Gregorio\Repository\RepositoryTransaksi;
-use Gregorio\Service\ServiceMysql;
+use Gregorio\Repository\TransaksiRepository;
+use Gregorio\Service\ServiceTransaksi;
 
 session_start();
 
 class TambahController
 {
 
-    private ServiceMysql $service;
+    private ServiceTransaksi $service;
 
 
     public function __construct()
     {
         $koneksi=Database::getConnection();
-        $repository= new RepositoryTransaksi($koneksi);
-        $this->service = new ServiceMysql($repository);
+        $repository= new TransaksiRepository($koneksi);
+        $this->service = new ServiceTransaksi($repository);
 
     }
 
@@ -32,7 +32,7 @@ class TambahController
         $model = [
             "title" => "Tambah PulsaRequest",
             "data" => [
-                "transaksi" => ServiceMysql::show_Distinct()
+                "transaksi" => ServiceTransaksi::show_Distinct()
             ]
 
         ];
@@ -57,7 +57,7 @@ class TambahController
             View::render('Home/tambah', [
                 "title" => "Tambah PulsaRequest",
                 "data" => [
-                    "transaksi" => ServiceMysql::show_Distinct(),
+                    "transaksi" => ServiceTransaksi::show_Distinct(),
                     "error" => $exception->getMessage()
                 ]
             ]);

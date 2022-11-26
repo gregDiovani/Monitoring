@@ -1,7 +1,7 @@
 
 
 <body>
-<div class="dash">
+
 
     <?php require __DIR__ . '/../Partial/rightsidebar.php' ?>
 
@@ -38,20 +38,15 @@
                         echo '<td> ' . $data['id_kamar'] . ' </td>';
                         echo '<td>' . $data['amount_rp'] . '</td>';
                         echo '<td>' . $data['receipt_id'] . '</td>';
-                        echo '<td>' . round($data['amount_rp']/1500, 1) . ' kWh</td>';
+                        echo '<td>' . round($data['amount_rp']/1500, 1) . ' kWh </td>';
                         echo '<td>' . date("d-m-Y H:i:s", strtotime($data['time'])) . ' </td>';
                         echo '</tr>';
                     }
-
                     ?>
                     </tbody>
                 </table>
 
-                <script>
-                    $(document).ready(function() {
-                        $('#tabel-data').DataTable();
-                    });
-                </script>
+
             </div>
 
             <div class="col-lg-6">
@@ -123,4 +118,15 @@
 
 
 </main>
-</div></body>
+</div>
+<script>
+    $(document).ready(function() {
+        $('#tabel-data').DataTable();
+    });
+</script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
+
+
+
+

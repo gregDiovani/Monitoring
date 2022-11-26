@@ -9,18 +9,18 @@ use Gregorio\Model\LoginRequest;
 use Gregorio\Model\LoginResponse;
 use Gregorio\Model\RegisterRequest;
 use Gregorio\Model\RegisterResponse;
-use Gregorio\Repository\RepositoryLogin;
+use Gregorio\Repository\UserRepository;
 
 
 
 class ServiceLogin
 {
-    private RepositoryLogin $repositoryLogin;
+    private UserRepository $repositoryLogin;
 
     /**
-     * @param RepositoryLogin $repositoryLogin
+     * @param UserRepository $repositoryLogin
      */
-    public function __construct(RepositoryLogin $repositoryLogin)
+    public function __construct(UserRepository $repositoryLogin)
     {
         $this->repositoryLogin = $repositoryLogin;
     }
@@ -36,7 +36,7 @@ class ServiceLogin
 
         $user = $this->repositoryLogin->findById($request->username);
         if($user != null ){
-            throw new ValidateExecption("User ID alredy exsist");
+            throw new ValidateExecption("User ID already exsist");
         }
 
         try {
@@ -83,7 +83,7 @@ class ServiceLogin
 
         $user = $this->repositoryLogin->findById($loginRequest->username);
         if($user == null){
-            throw new ValidateExecption("Id dan password salah");
+            throw new ValidateExecption("id dan password salah");
         }
 
         if(password_verify($loginRequest->password, $user->password)){
@@ -93,13 +93,13 @@ class ServiceLogin
             return $response;
 
         }else{
-            throw new ValidateExecption("Id dam password salah");
+            throw new ValidateExecption("id dam password salah");
         }
 
     }
 
     public function validateLoginRequest(LoginRequest $loginRequest){
-        if($loginRequest->username == null || $loginRequest->password ==null  ||  trim($loginRequest->username ) == ""  || trim($loginRequest->password ) == ""  )
+        if($loginRequest->username == null || $loginRequest->password == null  ||  trim($loginRequest->username ) == ""  || trim($loginRequest->password ) == ""  )
         {
             throw new ValidateExecption("username dan password tidak boleh kosong");
         }

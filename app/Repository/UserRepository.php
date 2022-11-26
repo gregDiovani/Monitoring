@@ -6,7 +6,7 @@ use Gregorio\Entity\User;
 use Gregorio\Model\RegisterRequest;
 use Gregorio\Model\RegisterResponse;
 
-class RepositoryLogin
+class UserRepository
 {
     private \PDO $koneksi;
 

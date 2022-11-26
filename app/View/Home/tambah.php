@@ -1,4 +1,3 @@
-
 <?php
 
 
@@ -11,13 +10,10 @@
 
 
 <body>
-    <div class="dash">
+
 
 
         <?php require __DIR__ . '/../Partial/rightsidebar.php' ?>
-
-
-
 
 
 
@@ -245,10 +241,7 @@
                 </div>
             </main>
         </div>
-    </div>
 
 
-</body>
 
 
-</html>
