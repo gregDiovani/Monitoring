@@ -6,22 +6,26 @@ use Gregorio\App\View;
 use Gregorio\Config\Database;
 use Gregorio\Exception\ValidateExecption;
 use Gregorio\Model\PulsaRequest;
+use Gregorio\Repository\SessionRepository;
 use Gregorio\Repository\TransaksiRepository;
+use Gregorio\Repository\UserRepository;
 use Gregorio\Service\ServiceTransaksi;
+use Gregorio\Service\SessionService;
 
-session_start();
 
 class TambahController
 {
 
-    private ServiceTransaksi $service;
+
+    private SessionService $sessionService;
 
 
     public function __construct()
     {
         $koneksi=Database::getConnection();
-        $repository= new TransaksiRepository($koneksi);
-        $this->service = new ServiceTransaksi($repository);
+        $sessionRepository = new SessionRepository($koneksi);
+        $userRepository = new UserRepository($koneksi);
+        $this->sessionService = new SessionService($sessionRepository, $userRepository);
 
     }
 
@@ -29,15 +33,42 @@ class TambahController
 
     {
 
-        $model = [
-            "title" => "Tambah PulsaRequest",
-            "data" => [
-                "transaksi" => ServiceTransaksi::show_Distinct()
-            ]
+        $user = $this->sessionService->current();
 
-        ];
 
-        View::render('Home/tambah', $model);
+        if ($user == null) {
+
+            $model = [
+                "title" => "Tambah Pulsa",
+                "data" => [
+                    "transaksi" => ServiceTransaksi::show_Distinct()
+                ]
+
+            ];
+
+            View::render('Home/tambah', $model);
+
+
+
+        }else{
+
+            View::render('Home/tambah',[
+                "title" => "Tambah Pulsa",
+                "user" => [
+                    "name" => $user->username
+                ],
+                "data" => [
+                    "transaksi" => ServiceTransaksi::show_Distinct()
+                ]
+
+            ]);
+
+
+        }
+
+
+
+
     }
 
     public function tambahPulsa()

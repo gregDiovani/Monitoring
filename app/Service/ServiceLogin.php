@@ -13,8 +13,14 @@ use Gregorio\Repository\UserRepository;
 
 
 
+
+
 class ServiceLogin
 {
+
+
+
+
     private UserRepository $repositoryLogin;
 
     /**
@@ -51,7 +57,6 @@ class ServiceLogin
             $response = new RegisterResponse();
             $response->user= $user;
             Database::commitTransaction();
-
             return $response;
 
         }catch (\Exception $exception){
@@ -99,10 +104,17 @@ class ServiceLogin
     }
 
     public function validateLoginRequest(LoginRequest $loginRequest){
+
+
         if($loginRequest->username == null || $loginRequest->password == null  ||  trim($loginRequest->username ) == ""  || trim($loginRequest->password ) == ""  )
         {
+
+
             throw new ValidateExecption("username dan password tidak boleh kosong");
         }
+
+
+
 
 }
 
