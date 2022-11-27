@@ -33,7 +33,7 @@ class HomeController
 
         if ($user == null) {
             View::render('Home/index', [
-                "title" => "PHP Login Management",
+                "title" => "Dashboard",
                 "data" => [
                     "pendapatan" => ServiceTransaksi::show_pendapatan()[0],
                     "jumlahPengsian" => ServiceTransaksi::show_pendapatan()[1],

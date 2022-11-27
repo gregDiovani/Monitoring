@@ -22,12 +22,12 @@
                         <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="username">
                     </div>
                     <div class="form-group">
-                        <input type="password" name="password"  class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        <input type="password" name="password"  class="form-control" id="InputPassword" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <!-- <label class="custom-control-label" for="customCheck1">Remember me</label> -->
+                            <input type="checkbox" class="custom-control-input" onclick="myFunction()" id="customCheck1">
+                          <label class="custom-control-label" for="customCheck1">Show My password</label>
                         </div>
                     </div>
                     <div class="account-dialog-actions">
@@ -38,6 +38,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("InputPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
 
 

@@ -156,8 +156,13 @@
                                     }
 
                                     ?>
+                                    <div class="notifications-show-all">
+                                        <a href="/history">Show all</a>
+                                    </div>
+
 
                                 </div>
+
                             </div>
                         </div>
                     </div>

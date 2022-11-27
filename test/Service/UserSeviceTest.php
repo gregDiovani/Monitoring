@@ -36,7 +36,7 @@ class UserSeviceTest extends TestCase
         $response = $this->userService->save($request);
 
 
-
+        self::assertEquals($request->username, $response->user->username);
 
     }
 

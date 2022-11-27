@@ -55,7 +55,7 @@ class LoginController
             View::redirect('/');
         }catch (ValidateExecption $exception){
             View::render('User/login',
-            ["tittle" => 'Login User',
+            ["title" => 'Login User',
               "error" => $exception->getMessage()
             ]);
 
