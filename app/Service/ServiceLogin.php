@@ -32,6 +32,8 @@ class ServiceLogin
     }
 
 
+
+
     /**
      * Service Untuk Register
      */
@@ -70,11 +72,19 @@ class ServiceLogin
 
         if($registerRequest->username == null || $registerRequest->password ==null  ||  trim($registerRequest->username ) == ""  || trim($registerRequest->password ) == ""  )
         {
+
+
             throw new ValidateExecption("username dan password tidak boleh kosong");
         }
 
 
+
+
+
+
     }
+
+
 
 
     /**
