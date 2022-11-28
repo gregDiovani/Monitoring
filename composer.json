@@ -2,6 +2,10 @@
     "name": "gregorio/mvc",
     "description": "mvc clean architecture",
     "type": "project",
+    "config": {
+
+        "platform-check": false
+    },
     "autoload": {
         "psr-4": {
             "Gregorio\\": "app"
