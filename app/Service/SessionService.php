@@ -12,6 +12,7 @@ class SessionService
 
     public static string $COOKIE_NAME = "S-Power";
 
+
     private SessionRepository $sessionRepository;
     private UserRepository $userRepository;
 
