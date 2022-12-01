@@ -30,6 +30,7 @@ class HomeController
 
 
 
+
         if ($user == null) {
             View::render('Home/index', [
                 "title" => "Dashboard",
