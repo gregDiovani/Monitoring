@@ -52,7 +52,7 @@
                     <a href="#" class="" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php
                         if(isset( $model['user']['name'])){
-                            echo '<img src="../public/css/user.png" alt="">
+                            echo '<img src="/css/user.png" alt="">
                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
                      <a class="dropdown-item" href="/user/logout">Logout</a>
 

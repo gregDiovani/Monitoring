@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
-        'name' => 'gregorio/mvc',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '49ee95ac60e3424008c428c1668e6458d1ac1ca5',
+        'name' => 'gregorio/qris',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -19,10 +19,10 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
-        'gregorio/mvc' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '49ee95ac60e3424008c428c1668e6458d1ac1ca5',
+        'gregorio/qris' => array(
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
