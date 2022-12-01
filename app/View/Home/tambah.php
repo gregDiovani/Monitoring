@@ -1,15 +1,13 @@
 <?php
 
-
+session_start();
 
 ?>
 
-<!doctype html>
-<html lang="en">
 
 
 
-<body>
+
 
 
 
@@ -21,11 +19,10 @@
             <main class="dash-content">
                 <?php if(isset($_SESSION["success"])){
 
-                    echo <<< 'Success'
-                    <div class="alert alert-success" role="alert">
+                   echo '<div class="alert alert-success" role="alert">
                       <h4 class="alert-heading">Penambahan pulsa perhasil</h4>
-                    </div>  
-                Success;
+                    </div> ';
+
                     unset($_SESSION["success"]);
 
 

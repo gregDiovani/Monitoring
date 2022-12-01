@@ -61,15 +61,16 @@ class ServiceTransaksi
 
     public static function show_dataChart(string $id_kamar):array
     {
-        $sql = "select id_kamar, date_format(tgl, '%M'),TRUNCATE(sum(amount_rp)/1500,2 ) AS totalPakai from t_pakai where id_kamar='$id_kamar' group by date_format(tgl, '%M') DESC";
+        $sql = "select MONTH(tgl) as Bulan, MONTHNAME(tgl) as BulanName, TRUNCATE(sum(amount_rp)/1500,2) as totalPakai from t_pakai where id_kamar='Kamar01' GROUP BY (Bulan) ORDER BY(Bulan)";
         $datas= TransaksiRepository::fetchAll($sql);
 
         return $datas;
     }
 
+
     public static function show_dataChartTransaksi():array
     {
-        $sql = "select sum(amount_rp) as totalRp,time from t_bayar group by date_format(time, '%M') DESC ";
+        $sql = "select sum(amount_rp) as totalRp, MONTH(time) as bulan, MONTHNAME(time) as BulanName from t_bayar  GROUP BY (bulan) ORDER BY(bulan)";
         $datas= TransaksiRepository::fetchAll($sql);
 
         return $datas;

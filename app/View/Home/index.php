@@ -98,11 +98,11 @@
                                 <canvas id="spurChartjsBar"></canvas>
                                 <script>
 
-                                    const xValues1 = [<?php foreach ($model['data']['chart'] as $row) { echo '"' . $row["date_format(tgl, '%M')"] . '",';} ?> ];
+                                    const xValues1 = [<?php foreach ($model['data']['chart'] as $row) { echo '"' . $row["BulanName"] . '",';} ?> ];
 
                                     var ctx = document.getElementById("spurChartjsBar").getContext('2d');
                                     var myChart = new Chart(ctx, {
-                                        type: 'bar',
+                                        type: 'line',
                                         data: {
                                             labels: xValues1,
                                             datasets: [

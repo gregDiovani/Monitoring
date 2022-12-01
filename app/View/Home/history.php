@@ -73,19 +73,20 @@
                         <canvas id="spurChartjsBar"></canvas>
                         <script>
 
-                            const xValues1 = [<?php foreach ($model['data']['chart']  as $row) { echo '"' . date("M", strtotime($row['time'])) . '",'; } ?> ];
-
+                            const xValues1 = [<?php foreach ($model['data']['chart']  as $row) { echo '"' . $row['BulanName'] . '",'; } ?> ];
                             var ctx = document.getElementById("spurChartjsBar").getContext('2d');
                             var myChart = new Chart(ctx, {
-                                type: 'bar',
+                                type: 'line',
                                 data: {
                                     labels: xValues1,
+
                                     datasets: [
                                         {
                                             label: 'Pendapatan',
                                             data: [<?php foreach ($model['data']['chart']  as $row) { echo '"' . $row["totalRp"] . '",'; } ?>],
-                                            backgroundColor: window.chartColors.primary,
+                                            backgroundColor: '#9BD0F5',
                                             borderColor: 'transparent'
+
                                         },
 
                                     ]
