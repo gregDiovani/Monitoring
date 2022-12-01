@@ -55,7 +55,7 @@ class LoginController
             View::redirect('/');
         }catch (ValidateExecption $exception){
             View::render('User/login',
-            ["title" => 'Login',
+            ["title" => 'Login User',
               "error" => $exception->getMessage()
             ]);
 
@@ -69,7 +69,7 @@ class LoginController
     public function login()
     {
         View::render('User/Login', [
-            "title" => "Login "
+            "title" => "Login user"
         ]);
     }
 
